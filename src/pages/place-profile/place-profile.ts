@@ -50,4 +50,8 @@ export class PlaceProfilePage {
     });
   }
 
+  delete(id) {
+    this.itemsRef.remove(id);
+  }
+
 }
