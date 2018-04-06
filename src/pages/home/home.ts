@@ -1,6 +1,8 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NavController } from 'ionic-angular';
 
+import { PlaceProfilePage } from '../place-profile/place-profile';
+
 declare var google;
 
 @Component({
@@ -26,7 +28,13 @@ export class HomePage {
     let mapOptions = {
       center: latLng,
       zoom: 16,
-      mapTypeId: google.maps.MapTypeId.ROADMAP
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      zoomControl: true,
+      mapTypeControl: true,
+      scaleControl: true,
+      streetViewControl: false,
+      rotateControl: true,
+      fullscreenControl: false
     };
 
     this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
@@ -54,6 +62,10 @@ export class HomePage {
     google.maps.event.addListener(marker, "click", () => {
       infoWindow.open(this.map, marker);
     });
+  }
+
+  goToPlaceProfilePage() {
+    this.navCtrl.push(PlaceProfilePage);
   }
 
 }

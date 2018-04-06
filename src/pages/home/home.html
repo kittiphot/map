@@ -7,5 +7,23 @@
 </ion-header> -->
 
 <ion-content>
+
   <div #map id="map"></div>
+
+  <ion-fab top right>
+    <button ion-fab mini>
+      <ion-icon ios="ios-menu" md="md-menu"></ion-icon>
+    </button>
+    <!-- <ion-fab-list side="left">
+      <button ion-fab (click)="goToAuthenPage()">
+        <ion-icon ios="ios-log-in" md="md-log-in"></ion-icon>
+      </button>
+    </ion-fab-list> -->
+    <ion-fab-list side="bottom">
+      <button ion-fab (click)="goToPlaceProfilePage()">
+        <ion-icon ios="ios-add" md="md-add"></ion-icon>
+      </button>
+    </ion-fab-list>
+  </ion-fab>
+
 </ion-content>
