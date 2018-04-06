@@ -1,6 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, LoadingController } from 'ionic-angular';
+import { NavController, LoadingController, ModalController } from 'ionic-angular';
 import { AngularFireDatabase } from 'angularfire2/database';
+
+import { PlaceProfileModalPage } from '../place-profile-modal/place-profile-modal';
 
 @Component({
   selector: 'page-place-profile',
@@ -15,7 +17,8 @@ export class PlaceProfilePage {
   constructor(
     public navCtrl: NavController,
     private afDatabase: AngularFireDatabase, //ต่อดาต้าเบส
-    private loadingCtrl: LoadingController
+    private loadingCtrl: LoadingController,
+    private modalCtrl: ModalController
   ) {
     this.items = []
     this.itemsRef = this.afDatabase.list('test')
@@ -48,6 +51,11 @@ export class PlaceProfilePage {
       });
       loading.dismiss()
     });
+  }
+
+  openModal() {
+    let profileModal = this.modalCtrl.create(PlaceProfileModalPage);
+    profileModal.present()
   }
 
   delete(id) {

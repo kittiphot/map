@@ -11,6 +11,7 @@ import { AngularFireDatabaseModule } from 'angularfire2/database';
 import { MyApp } from './app.component';
 import { HomePage } from '../pages/home/home';
 import { PlaceProfilePage } from '../pages/place-profile/place-profile';
+import { PlaceProfileModalPage } from '../pages/place-profile-modal/place-profile-modal';
 
 export const firebaseConfig = {
   apiKey: "AIzaSyBYXy67zuFZfvBN2jT6lOrfFbdg_Y2Dph8",
@@ -25,7 +26,8 @@ export const firebaseConfig = {
   declarations: [
     MyApp,
     HomePage,
-    PlaceProfilePage
+    PlaceProfilePage,
+    PlaceProfileModalPage
   ],
   imports: [
     BrowserModule,
@@ -37,7 +39,8 @@ export const firebaseConfig = {
   entryComponents: [
     MyApp,
     HomePage,
-    PlaceProfilePage
+    PlaceProfilePage,
+    PlaceProfileModalPage
   ],
   providers: [
     StatusBar,
