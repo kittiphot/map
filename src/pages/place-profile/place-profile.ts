@@ -21,7 +21,7 @@ export class PlaceProfilePage {
     private modalCtrl: ModalController
   ) {
     this.items = []
-    this.itemsRef = this.afDatabase.list('test')
+    this.itemsRef = this.afDatabase.list('placeProfile')
   }
 
   ionViewDidLoad() {
@@ -33,8 +33,8 @@ export class PlaceProfilePage {
       content: 'Please wait...'
     })
     loading.present()
-    // this.afDatabase.list('/test').valueChanges().subscribe(data => this.items = data);
-    // this.afDatabase.list('/test').valueChanges().subscribe(data => console.log(data));    
+    // this.itemsRef.valueChanges().subscribe(data => this.items = data);
+    // this.itemsRef.valueChanges().subscribe(data => console.log(data));    
     this.itemsRef.snapshotChanges().subscribe(data => {
       this.items = []
       data.forEach(data => {
@@ -43,7 +43,7 @@ export class PlaceProfilePage {
         // console.log(data.payload.val());
         this.items.push({
           id: data.key,
-          name : data.payload.val()['test']
+          name : data.payload.val()['name']
           // name: data.payload.val()['name'],
           // lastname: data.payload.val()['lastname']
         })
