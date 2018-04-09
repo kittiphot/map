@@ -1,5 +1,6 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { AngularFireDatabase } from 'angularfire2/database';
 
 import { PlaceProfilePage } from '../place-profile/place-profile';
 
@@ -13,9 +14,13 @@ export class HomePage {
 
   @ViewChild("map") mapElement: ElementRef;
   map: any;
+  itemsRef: any;
 
-  constructor(public navCtrl: NavController) {
-
+  constructor(
+    public navCtrl: NavController,
+    private afDatabase: AngularFireDatabase, //ต่อดาต้าเบส
+  ) {
+    this.itemsRef = this.afDatabase.list('placeProfile')
   }
 
   ionViewDidLoad() {
@@ -38,18 +43,33 @@ export class HomePage {
     };
 
     this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
-    this.addMarker();
+    this.getPlaceProfiles();
+  }
+
+  getPlaceProfiles() { 
+    this.itemsRef.snapshotChanges().subscribe(data => {
+      data.forEach(values => {
+        let params = {
+          id: values.key,
+          name: values.payload.val()['name'],
+          lat: values.payload.val()['lat'],
+          long: values.payload.val()['long']
+        }
+        this.addMarker(params);
+      });
+    });
   }
   
-  addMarker() {
+  addMarker(params) {
     let marker = new google.maps.Marker({
       map: this.map,
       animation: google.maps.Animation.DROP,
       // position: this.map.getCenter()
-      position: new google.maps.LatLng(16.246587, 103.247490)
+      position: new google.maps.LatLng(params.lat, params.long)
     });
 
-    let content = "<h4>Information!</h4>";
+    // let content = "<h4>Information!</h4>";
+    let content = params.name;
 
     this.addInfoWindow(marker, content);
   }

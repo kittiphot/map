@@ -43,8 +43,7 @@ export class PlaceProfilePage {
         // console.log(data.payload.val());
         this.items.push({
           id: data.key,
-          name : data.payload.val()['name']
-          // name: data.payload.val()['name'],
+          name: data.payload.val()['name']
           // lastname: data.payload.val()['lastname']
         })
         // console.log(this.items);
@@ -53,8 +52,15 @@ export class PlaceProfilePage {
     });
   }
 
-  openModal() {
+  create() {
     let profileModal = this.modalCtrl.create(PlaceProfileModalPage);
+    profileModal.present()
+  }
+
+  update(id) {
+    let profileModal = this.modalCtrl.create(PlaceProfileModalPage, {
+      id: id
+    });
     profileModal.present()
   }
 

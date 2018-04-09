@@ -13,22 +13,21 @@
 
 <ion-content>
 
-  <ion-list>
-    <ion-item-sliding *ngFor="let item of items">
-      <ion-item>
-        <!-- <ion-avatar item-start>
-        </ion-avatar> -->
-        {{ item.name }}
-      </ion-item>
-      <ion-item-options side="right">
-        <button ion-button icon-only style="background: #f0ad4e" (click)="update(item.id)">
-          <ion-icon name="create"></ion-icon>
-        </button>
-        <button ion-button icon-only color="danger" (click)="delete(item.id)">
-          <ion-icon name="trash"></ion-icon>
-        </button>
-      </ion-item-options>
-    </ion-item-sliding>
-  </ion-list>
+  <form #myform="ngForm" (ngSubmit)="onSubmit(myform)">
+
+    <ion-item>
+      <ion-input type="text" [(ngModel)]="params.name" name="name" placeholder="Name ..." required></ion-input>
+    </ion-item>
+    
+    <ion-item>
+      <ion-input type="text" [(ngModel)]="params.lat" name="lat" placeholder="Latitude ..." required></ion-input>
+    </ion-item>
+    
+    <ion-item>
+      <ion-input type="text" [(ngModel)]="params.long" name="long" placeholder="Longitude ..." required></ion-input>
+    </ion-item>
+
+    <button ion-button type="submit" block [disabled]="!myform.valid">บันทึก</button>
+  </form>
 
 </ion-content>
