@@ -46,7 +46,7 @@ export class HomePage {
     this.getPlaceProfiles();
   }
 
-  getPlaceProfiles() { 
+  getPlaceProfiles() {
     this.itemsRef.snapshotChanges().subscribe(data => {
       data.forEach(values => {
         let params = {
@@ -59,7 +59,7 @@ export class HomePage {
       });
     });
   }
-  
+
   addMarker(params) {
     let marker = new google.maps.Marker({
       map: this.map,
@@ -69,14 +69,15 @@ export class HomePage {
     });
 
     // let content = "<h4>Information!</h4>";
-    let content = params.name;
+    let myLinkLocation = 'geo:' + params.lat + ',' + params.long + '?q=' + params.name;
+    let content = "<h5>" + params.name + "</h5>" + "<a target='_blank' jstcache='6' href=" + myLinkLocation + "> <span>ดูใน Google Maps </span> </a>";
 
-    this.addInfoWindow(marker, content);
+    this.addInfoWindow(marker, content, params);
   }
 
-  addInfoWindow(marker, content) {
+  addInfoWindow(marker, content, params) {
     let infoWindow = new google.maps.InfoWindow({
-      content: content
+      content: content 
     });
 
     google.maps.event.addListener(marker, "click", () => {
