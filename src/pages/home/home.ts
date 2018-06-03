@@ -28,8 +28,6 @@ export class HomePage {
 
   ionViewDidLoad() {
     this.geolocation.getCurrentPosition().then((resp) => {
-      // resp.coords.latitude
-      // resp.coords.longitude
       this.userPosition = {
         lat: resp.coords.latitude,
         long: resp.coords.longitude
@@ -57,6 +55,11 @@ export class HomePage {
 
     this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
     this.getPlaceProfiles();
+
+    google.maps.event.addListener(this.map, "click", (event) => {
+      console.log(event.latLng.lat());
+      console.log(event.latLng.lng());
+    });
   }
 
   getPlaceProfiles() {
@@ -69,7 +72,6 @@ export class HomePage {
           long: values.payload.val()['long']
         }
         let distance = this.getDistanceBetweenPoints(params).toFixed(2)
-        console.log(distance)
         this.addMarker(params, distance)
       });
     });
