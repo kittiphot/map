@@ -81,7 +81,6 @@ export class HomePage {
   addMarker(params, distance) {
     let marker = new google.maps.Marker({
       map: this.map,
-      size: 1,
       animation: google.maps.Animation.DROP,
       // position: this.map.getCenter()
       position: new google.maps.LatLng(params.lat, params.long)
