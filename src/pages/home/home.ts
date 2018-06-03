@@ -43,8 +43,9 @@ export class HomePage {
 
     let mapOptions = {
       center: latLng,
-      zoom: 16,
-      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      zoom: 15,
+      // mapTypeId: google.maps.MapTypeId.ROADMAP,
+      mapTypeId: google.maps.MapTypeId.SATELLITE,
       zoomControl: true,
       mapTypeControl: true,
       scaleControl: true,
@@ -80,6 +81,7 @@ export class HomePage {
   addMarker(params, distance) {
     let marker = new google.maps.Marker({
       map: this.map,
+      size: 1,
       animation: google.maps.Animation.DROP,
       // position: this.map.getCenter()
       position: new google.maps.LatLng(params.lat, params.long)
@@ -87,7 +89,10 @@ export class HomePage {
 
     // let content = "<h4>Information!</h4>";
     let myLinkLocation = 'geo:' + params.lat + ',' + params.long + '?q=' + params.name;
-    let content = "<h5>" + params.name + "</h5>" + distance + "<br>" + "<a target='_blank' jstcache='6' href=" + myLinkLocation + "> <span>ดูใน Google Maps </span> </a>";
+    let content = 
+      "<h5>" + params.name + "</h5>" + 
+      distance + "<br>" + 
+      "<a target='_blank' jstcache='6' href=" + myLinkLocation + "> <span>ดูใน Google Maps </span> </a>";
 
     this.addInfoWindow(marker, content, params);
   }

@@ -40,7 +40,7 @@ export class PlaceProfileModalPage {
 
     let mapOptions = {
       center: latLng,
-      zoom: 16,
+      zoom: 15,
       mapTypeId: google.maps.MapTypeId.ROADMAP,
       zoomControl: true,
       mapTypeControl: true,
