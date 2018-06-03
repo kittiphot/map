@@ -1,6 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { NavController, NavParams, ViewController } from 'ionic-angular';
 import { AngularFireDatabase } from 'angularfire2/database';
+
+declare var google;
 
 @Component({
   selector: 'page-place-profile-modal',
@@ -8,9 +10,11 @@ import { AngularFireDatabase } from 'angularfire2/database';
 })
 export class PlaceProfileModalPage {
 
-  itemsRef: any;
-  params: any
-  id: any
+  @ViewChild("map") mapElement: ElementRef;
+  private map: any;
+  private itemsRef: any;
+  private params: any
+  private id: any
 
   constructor(
     public navCtrl: NavController,
@@ -28,7 +32,31 @@ export class PlaceProfileModalPage {
   }
 
   ionViewDidLoad() {
+    this.loadMap();
+  }
+
+  loadMap() {
+    let latLng = new google.maps.LatLng(16.245616, 103.250208);
+
+    let mapOptions = {
+      center: latLng,
+      zoom: 16,
+      mapTypeId: google.maps.MapTypeId.ROADMAP,
+      zoomControl: true,
+      mapTypeControl: true,
+      scaleControl: true,
+      streetViewControl: false,
+      rotateControl: true,
+      fullscreenControl: false
+    };
+
+    this.map = new google.maps.Map(this.mapElement.nativeElement, mapOptions);
     this.getPlaceProfiles();
+
+    google.maps.event.addListener(this.map, "click", (event) => {
+      console.log(event.latLng.lat());
+      console.log(event.latLng.lng());
+    });
   }
 
   getPlaceProfiles() { 
